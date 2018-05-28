@@ -18,7 +18,7 @@ public class PageController {
 	@RequestMapping(value={"/", "/home", "/index"})
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("page");
-	//	mv.addObject("title","Home");
+		mv.addObject("title","Home");
 		
 		mv.addObject("categories",categoryDAO.list());
 		mv.addObject("userClickHome",true);
