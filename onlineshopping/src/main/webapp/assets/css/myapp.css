@@ -14,7 +14,7 @@ body {
 
 @media (min-width: 992px) {
   body {
-    padding-top: 56px;
+    padding-top: 0px;
   }
 }
 
@@ -41,4 +41,9 @@ custom styling
 .dataTableImg {
 	width:100px;
 	height:100px;
+}
+
+
+.help-block {
+	color: #d9534f;
 }
