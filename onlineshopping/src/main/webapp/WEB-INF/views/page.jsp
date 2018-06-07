@@ -103,9 +103,14 @@
 		<!-- Data table Plugin -->
 		<script src="${js}/jquery.dataTables.js"></script>
 
+		<!-- BootBox -->
+		<script src="${js}/bootbox.min.js"></script>
+		
+		
 		<!-- Data table Bootstrap script -->
 		<script src="${js}/dataTables.bootstrap4.js"></script>
-
+		
+		
 		<!-- Self loaded js file -->
 		<script src="${js}/myapp.js"></script>
 	</div>

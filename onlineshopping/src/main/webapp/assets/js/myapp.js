@@ -53,9 +53,11 @@ $(function() {
 					columns : [
 							{
 								data : 'code',
-								mRender: function(data,type,row) {
-									
-									return '<img src="'+window.contextRoot+'/resources/images/'+data+'.jpg" class="dataTableImg" />'
+								mRender : function(data, type, row) {
+
+									return '<img src="' + window.contextRoot
+											+ '/resources/images/' + data
+											+ '.jpg" class="dataTableImg" />'
 								}
 							},
 							{
@@ -65,7 +67,7 @@ $(function() {
 								data : 'brand'
 							},
 							{
-			
+
 								data : 'unitPrice',
 								mRender : function(data, type, row) {
 									return '&#8377; ' + data
@@ -73,11 +75,11 @@ $(function() {
 							},
 							{
 								data : 'quantity',
-								mRender: function(data,type,row) {
-									if(data<1) {
+								mRender : function(data, type, row) {
+									if (data < 1) {
 										return '<span style="color:red">Out of stock!</span>';
 									}
-									
+
 									return data;
 								}
 							},
@@ -91,13 +93,17 @@ $(function() {
 											+ '/show/'
 											+ data
 											+ '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
-									
-									if (row.quantity <1) {
+
+									if (row.quantity < 1) {
 										str += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 									}
-									
+
 									else {
-										str += '<a href="'+ window.contextRoot+'/cart/add/'+ data+ '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+										str += '<a href="'
+												+ window.contextRoot
+												+ '/cart/add/'
+												+ data
+												+ '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 
 									}
 									return str;
@@ -108,19 +114,47 @@ $(function() {
 				});
 
 	}
-	
-	//dismissing the alert after 3 second
-	
+
+	// dismissing the alert after 3 second
+
 	var $alert = $('.alert');
-	
-	if($alert.length) {
-		
-		setTimeout(function(){
+
+	if ($alert.length) {
+
+		setTimeout(function() {
 			$alert.fadeOut('slow');
-			
-		} ,3000)
-		
+
+		}, 3000)
+
 	}
-	
-	
+	// --------------------
+
+	$('.switch input[type="checkbox"]').on('change',
+					function() {
+						var checkbox = $(this);
+						var checked = checkbox.prop('checked');
+						var dMsg = (checked)? 'You want to activate the product?'
+								: 'You want to deactivate the product?';
+
+						var value = checkbox.prop('value');
+
+						bootbox.confirm({
+									size: 'medium',
+									title: 'Product Activation & Deactivation',
+									message: dMsg,
+									callback: function(confirmed) {
+										if (confirmed) {
+											console.log(value);
+											bootbox.alert({
+														size: 'medium',
+														title: 'Information',
+														message: 'You are going to perform operation on product'
+																+ value
+													});
+										} else {
+											checkbox.prop('checked', !checked);
+										}
+									}
+								});
+					});
 });
