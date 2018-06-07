@@ -98,15 +98,3 @@ input:checked + .slider {
 input:checked + .slider:before {
 	transform: translateX(20px);
 }
-
-.fade.in {
-  opacity: 1;
-}
-.modal.in .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  -o-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-.modal-backdrop.in {
-  opacity: 0.5;
-}
