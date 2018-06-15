@@ -35,8 +35,8 @@
 <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
 
 <!-- Bootstrap DataTables -->
-<link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
-
+<link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
+	
 
 <!-- Custom styles for this template -->
 <link href="${css}/myapp.css" rel="stylesheet">
@@ -95,16 +95,16 @@
 		<%@include file="./shared/footer.jsp"%>
 
 		<!-- jquery -->
-		<script src="${js}/jquery.min.js"></script>
+		<script src="${js}/jquery.js"></script>
 
 		<!-- Bootstrap core JavaScript -->
-		<script src="${js}/bootstrap.bundle.min.js"></script>
+		<script src="${js}/bootstrap.min.js"></script>
 
 		<!-- Data table Plugin -->
 		<script src="${js}/jquery.dataTables.js"></script>
 
 		<!-- Data table Bootstrap script -->
-		<script src="${js}/dataTables.bootstrap4.js"></script>
+		<script src="${js}/dataTables.bootstrap.js"></script>
 		
 		<!-- BootBox -->
 		<script src="${js}/bootbox.min.js"></script>

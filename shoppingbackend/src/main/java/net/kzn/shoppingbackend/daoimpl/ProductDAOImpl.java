@@ -42,7 +42,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public boolean add(Product product) {
 		try {
-			 sessionFactory.getCurrentSession().persist(product);
+			 sessionFactory.getCurrentSession().saveOrUpdate(product);
 			 return true;
 		}
 		catch (Exception e) {

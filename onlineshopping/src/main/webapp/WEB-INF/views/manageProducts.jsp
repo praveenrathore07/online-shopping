@@ -111,6 +111,14 @@
 									path="categoryId" size="1" items="${categories}"
 									itemLabel="name" itemValue="id">
 								</sf:select>
+								
+								<c:if test="${product.id ==0}" >
+								
+								<div class="text-right">
+								<br/>
+								<button type="button" data-toggle="modal" data-target="#myCategoryModal" class="btn btn-warning btn-sm">Add Category</button>
+								</div>
+								</c:if>
 
 
 							</div>
@@ -171,6 +179,7 @@
 							<th>ID</th>
 							<th>&#160;</th>
 							<th>Name</th>
+							<th>Brand</th>
 							<th>Quantity</th>
 							<th>Unit Price</th>
 							<th>Active</th>
@@ -178,67 +187,12 @@
 						</tr>
 					</thead>
 					
-					<tboody>
-						<tr>
-							<td>4</td>
-							<td> 
-							
-							<img class="adminDataTableImg" src="${contextRoot}/resources/images/PRDMNO123PQRX.jpg" alt="Macbook Pro"/>
-							</td>
-							<td>Macbook Pro</td>
-							<td>3</td>
-							<td>&#8377; 54000</td>
-							<td>
-								<!-- toggle switch -->
-								<label class="switch" >
-									<input type="checkbox" checked="checked" value="4"/>
-									<div class="slider"></div>
-								</label>
-								
-							</td>
-							<td>
-								<a href="${contextRoot}/manage/4/product" class="btn btn-warning">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</a>
-							
-							</td>
-						
-						</tr>
-						
-						
-						<tr>
-							<td>4</td>
-							<td> 
-							
-							<img class="adminDataTableImg" src="${contextRoot}/resources/images/PRDMNO123PQRX.jpg" alt="Macbook Pro"/>
-							</td>
-							<td>Macbook Pro</td>
-							<td>3</td>
-							<td>&#8377; 54000</td>
-							<td>
-								<!-- toggle switch -->
-								<label class="switch" >
-									<input type="checkbox" value="4"/>
-									<div class="slider"></div>
-								</label>
-								
-							</td>
-							<td>
-								<a href="${contextRoot}/manage/4/product" class="btn btn-warning">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</a>
-							
-							</td>
-						
-						</tr>
-						
-						
-					</tboody>
 					<tfoot>
 						<tr>
 							<th>ID</th>
 							<th>&#160;</th>
 							<th>Name</th>
+							<th>Brand</th>
 							<th>Quantity</th>
 							<th>Unit Price</th>
 							<th>Active</th>
@@ -253,4 +207,28 @@
 
 	</div>
 
+
+	<div class="modal fade" id="myCategoryModal" role="dialog" tabindex="-1">
+	
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			
+			<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+					<h4 class="modal-title">Add new Category</h4>
+				</div>
+				
+			<!-- Modal Body -->	
+				<div class="modal-body">
+					<!-- Category Form -->
+					
+				
+				</div>
+			</div>
+		</div>
+	
+	</div>
 </div>

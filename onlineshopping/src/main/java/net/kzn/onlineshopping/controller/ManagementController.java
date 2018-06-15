@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,6 +60,24 @@ public class ManagementController {
 		return mv;
 	}
 	
+	
+	
+	@RequestMapping(value="/{id}/product",method=RequestMethod.GET)
+	public ModelAndView showEditProduct(@PathVariable("id") int id) {
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("userClickManageProducts",true);
+		
+		mv.addObject("title","Manage Products");
+		
+		//set few of the fields
+		Product product = productDAO.get(id);		
+		mv.addObject("product",product);
+		
+		return mv;
+	}
+	
+	
+	
 	//returnig categories for all the request mapping
 	@ModelAttribute("categories")
 	public List<Category> getCategories() {
@@ -71,7 +90,15 @@ public class ManagementController {
 	@RequestMapping(value="/products", method=RequestMethod.POST)
 	public String handleProductSubmission(@Valid @ModelAttribute("product") Product mProduct, BindingResult results, Model model,HttpServletRequest requesst) {
 		
-		new ProductValidator().validate(mProduct, results);
+		
+		if (mProduct.getId() == 0) {
+			new ProductValidator().validate(mProduct, results);
+		} else {
+			if (!mProduct.getFile().getOriginalFilename().equals("")) {
+				new ProductValidator().validate(mProduct, results);
+			}
+		}
+		
 		
 		//check if there are any errors
 		if(results.hasErrors()) {
@@ -85,6 +112,16 @@ public class ManagementController {
 		logger.info(mProduct.toString());
 		//create a new product record
 		productDAO.add(mProduct);
+		
+		if (mProduct.getId() == 0) {
+			//create a new product if id is 0
+			productDAO.add(mProduct);
+			
+		}
+		else {
+			//update the product if is not 0
+			productDAO.update(mProduct);
+		}
 		
 		if(!mProduct.getFile().getOriginalFilename().equals("")) {
 			FileUploadUtility.uploadFile(requesst,mProduct.getFile(),mProduct.getCode());
