@@ -128,7 +128,27 @@ $(function() {
 
 	}
 	// --------------------
-
+	
+	// To align the model dialog 
+	
+	/*$(document).ready(function(){
+	    function alignModal(){
+	        var modalDialog = $(this).find("#myCategoryModal");
+	        
+	        // Applying the top margin on modal dialog to align it vertically center
+	        modalDialog.css("margin-top", Math.max(0, ($(window).height() - modalDialog.height()) / 2));
+	    }
+	    // Align modal when it is displayed
+	    $(".modal").on("shown.bs.modal", alignModal);
+	    
+	    // Align modal when user resize the window
+	    $(window).on("resize", function(){
+	        $(".modal:visible").each(alignModal);
+	    });   
+	});
+	*/
+	
+	//---------------------------
 		
 	//Datatable for admin
 	
@@ -240,13 +260,18 @@ $(function() {
 										callback: function(confirmed) {
 											if (confirmed) {
 												console.log(value);
-												bootbox.alert({
-															size : 'medium',
-															title : 'Information',
-															message : 'You are going to perform operation on product'
-																	+ value
-														});
-											} else {
+												
+												var activationUrl = window.contextRoot + '/manage/product/' + value + '/activation';
+												
+												$.post(activationUrl, function(data) {
+													bootbox.alert({
+														size : 'medium',
+														title : 'Information',
+														message : data
+													});
+												});
+												
+												} else {
 												checkbox.prop('checked', !checked);
 											}
 										}

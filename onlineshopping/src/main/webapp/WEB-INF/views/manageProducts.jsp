@@ -224,7 +224,33 @@
 			<!-- Modal Body -->	
 				<div class="modal-body">
 					<!-- Category Form -->
-					
+					<sf:form modelAttribute="category" action="${contextRoot}/manage/category"
+					method="POST" class="form-horizontal">
+						
+						<div class="form-group">
+						
+							<label for ="category_name" class="control-label col-md-4">Category Name</label>
+							<div class="col-md-8">
+								<sf:input type="text" path="name" id="category_name" class="form-control"/>
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+						
+							<label for ="category_description" class="control-label col-md-4">Category Description</label>
+							<div class="col-md-8">
+								<sf:textarea cols="" rows="5" path="description" id="category_description" class="form-control"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-md-offset-4 col-md-8">
+								<input type="submit" value="Add Category" class="btn btn-primary"/>
+							</div>
+						</div>
+						
+					</sf:form>
 				
 				</div>
 			</div>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.kzn.onlineshopping.util.FileUploadUtility;
@@ -56,7 +57,11 @@ public class ManagementController {
 			if (operation.equals("product")) {
 				mv.addObject("message","Product Submitted successfully!");
 			}
+			else if (operation.equals("category")) {
+				mv.addObject("message","Category Submitted successfully!");
+			}
 		}
+		
 		return mv;
 	}
 	
@@ -76,6 +81,16 @@ public class ManagementController {
 		return mv;
 	}
 	
+	//to handle category submission
+	@RequestMapping(value="/category",method=RequestMethod.POST)
+	public String handleCategorySubmission(@ModelAttribute("category") Category category) {
+		
+		//add new category
+		categoryDAO.add(category);
+		
+		return "redirect:/manage/products?operation=category";
+		
+	}
 	
 	
 	//returnig categories for all the request mapping
@@ -85,6 +100,12 @@ public class ManagementController {
 		return categoryDAO.list();
 		
 	}
+	
+	@ModelAttribute("category")
+	public Category getCategory() {
+		return new Category();
+	}
+	
 	
 	//manage product submission
 	@RequestMapping(value="/products", method=RequestMethod.POST)
@@ -99,11 +120,8 @@ public class ManagementController {
 			}
 		}
 		
-		
 		//check if there are any errors
 		if(results.hasErrors()) {
-		
-
 			model.addAttribute("userClickManageProducts",true);
 			model.addAttribute("title","Manage Products");
 			return "page";
@@ -129,6 +147,22 @@ public class ManagementController {
 		
 		return "redirect:/manage/products?operation=product";
 		
+	}
+	
+	@RequestMapping(value="/product/{id}/activation", method=RequestMethod.POST)
+	@ResponseBody
+	public String handleProductActivation(@PathVariable int id) {
+		
+		Product product = productDAO.get(id);
+		
+		boolean isActive = product.isActive();
+		
+		product.setActive(!product.isActive());
+		
+		productDAO.update(product);
+		
+		return (isActive)? "You have successfully deactivated the product with id "+ product.getId() 
+		: "You have successfully Activated the product with id "+ product.getId();
 	}
 	
 }
